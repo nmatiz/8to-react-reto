@@ -1,48 +1,48 @@
 import React, { Component } from 'react';
 
-/// Modifica el componente para que se puedan agregar tareas
-
 class App extends Component {
-  constructor(props) {
-    super(props);
-    //se crea el arreglo
-    this.state = {
-      tasks: ['Sacar la ropa', 'Hacer la cama', 'Leer mucho'],
-      task: ""
-    }
-  }
-    //manejo del estado, cuando se adiciona una tarea
-    showTasks(e){
-      this.setState({
-        task: e.target.value
-      })
-    }
-//controla que se adicionen nuevos elementos
-  addTask = (event) => {
-    this.setState({
-      tasks: this.state.tasks.concat(this.state.task),
-      task: ""
-    })
-   event.preventDefault();
-  }
-  
-  render() {
-    return (
-      <div className="wrapper">
-        <div className="list">
-          <h3>Por hacer:</h3>
-          <ul className="todo">
-          {this.state.tasks.map((act, index) => <li key={index}>{act}</li>)}
-          </ul>
-           {/*se adiciona el llamado al newTask, para que adicion los elementos al arreglo*/}
-           <form onSubmit={this.addTask}>
-             <input type="text" id="new-task" placeholder="Ingresa una tarea y oprime Enter" onChange={this.showTasks.bind(this)} value={this.state.task}/>
-           </form>
-        </div>
-      </div>
-    )
-  }
-}
+ constructor(props) {
+   super(props)
+   this.state = {
+     task: "",
+     alltasks: ["Sacar la ropa", "Hacer la cama", "Leer un rato"]
+   };
+   this.handleChange = this.handleChange.bind(this);
+   this.handleKeyPress = this.handleKeyPress.bind(this);
+ }
 
+ handleChange(e) {
+   this.setState({
+     task: e.target.value
+   });
+ }
+
+ handleKeyPress(e) {
+   if (e.key === 'Enter') {
+     this.setState({
+       alltasks: this.state.alltasks.concat(this.state.task),
+       task: ''
+     });
+   }
+ }
+
+ render() {
+   return (
+     <div className="wrapper">
+       <div className="list">
+         <h3>Por hacer:</h3>
+         <ul className="todo">
+           {this.state.alltasks.map(alltask =>
+             <li key={alltask}>{alltask}</li>
+           )}
+         </ul>
+         <div>
+           <input type="text" id="new-task" placeholder="Ingresa una tarea y oprime Enter" onChange={this.handleChange} onKeyPress={this.handleKeyPress} value={this.state.task} />
+         </div>
+       </div>
+     </div>
+   )
+ }
+}
 
 export default App;

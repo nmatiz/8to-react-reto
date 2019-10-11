@@ -32,7 +32,7 @@ class App extends Component {
         <div className="list">
           <h3>Por hacer:</h3>
           <ul className="todo">
-          {this.state.tasks.map((act) => <li key={act}>{act}</li>)}
+          {this.state.tasks.map((act, index) => <li key={index}>{act}</li>)}
           </ul>
            {/*se adiciona el llamado al newTask, para que adicion los elementos al arreglo*/}
            <form onSubmit={this.addTask}>

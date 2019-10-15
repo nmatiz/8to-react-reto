@@ -7,17 +7,18 @@ class App extends Component {
      task: "",
      alltasks: ["Sacar la ropa", "Hacer la cama", "Leer un rato"]
    };
-   this.handleChange = this.handleChange.bind(this);
-   this.handleKeyPress = this.handleKeyPress.bind(this);
+   //se definen variables para cada una de las funciones
+   this.cambioEstado = this.cambioEstado.bind(this);
+   this.controlTeclado = this.controlTeclado.bind(this);
  }
 //funcion para detectar el cambio de estado de 'task', el evento (e), controla el momento que cambia
- handleChange(e) {
+ cambioEstado(e) {
    this.setState({
      task: e.target.value
    });
  }
 //funcion para almacenar la nueva propiedad, una ves se detecta el enter en el evento:   "e.key === 'Enter'", se almacena con el concatpara ir almacenando los estados de alltasks
- handleKeyPress(e) {
+ controlTeclado(e) {
    if (e.key === 'Enter') {
      this.setState({
        alltasks: this.state.alltasks.concat(this.state.task),
@@ -42,7 +43,7 @@ class App extends Component {
 {/*Con el onChange detectamos si cambia de estado el elemento. */}
 {/*Con el onKeyPress detectamos si hubo un evento como 'enter' en este caso, y onClick si hubo un 'click' en el campo de entrada*/}
 {/*Con el value controlamos el estado actual del elemento*/}
-           <input type="text" id="new-task" placeholder="Ingresa una tarea y oprime Enter" onChange={this.handleChange} onKeyPress={this.handleKeyPress} value={this.state.task} />
+           <input type="text" id="new-task" placeholder="Ingresa una tarea y oprime Enter" onChange={this.cambioEstado} onKeyPress={this.controlTeclado} value={this.state.task} />
          </div>
        </div>
      </div>
